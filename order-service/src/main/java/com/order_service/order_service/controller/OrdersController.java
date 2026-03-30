@@ -1,5 +1,6 @@
 package com.order_service.order_service.controller;
 
+import com.order_service.order_service.clients.ShipmentFeignClient;
 import com.order_service.order_service.dto.OrderRequestDto;
 import com.order_service.order_service.service.OrdersService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,9 +18,11 @@ import java.util.List;
 public class OrdersController {
 
     private final OrdersService orderService;
+    private final ShipmentFeignClient shipmentFeignClient;
 
     @GetMapping("/helloOrders")
     public String helloOrders() {
+        System.out.println(shipmentFeignClient.helloShipment());
         return "Hello from Orders Service";
     }
 

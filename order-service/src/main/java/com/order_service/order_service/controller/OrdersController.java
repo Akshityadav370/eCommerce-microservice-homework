@@ -23,9 +23,10 @@ public class OrdersController {
     private final ShipmentFeignClient shipmentFeignClient;
 
     @GetMapping("/helloOrders")
-    public String helloOrders() {
+    public String helloOrders(@RequestHeader("X-User-Id") Long userId) {
+
         System.out.println(shipmentFeignClient.helloShipment());
-        return "Hello from Orders Service";
+        return "Hello from Orders Service, userId is: "+userId;
     }
 
     @PostMapping("/create-order")

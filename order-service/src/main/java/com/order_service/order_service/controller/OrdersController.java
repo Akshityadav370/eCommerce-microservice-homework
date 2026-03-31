@@ -3,6 +3,8 @@ package com.order_service.order_service.controller;
 import com.order_service.order_service.clients.ShipmentFeignClient;
 import com.order_service.order_service.dto.OrderRequestDto;
 import com.order_service.order_service.service.OrdersService;
+import com.shipping_service.shipping_service.dto.ShipmentDto;
+import com.shipping_service.shipping_service.entity.ShipmentStatus;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +31,16 @@ public class OrdersController {
     @PostMapping("/create-order")
     public ResponseEntity<OrderRequestDto> createOrder(@RequestBody OrderRequestDto orderRequestDto) {
         OrderRequestDto orderRequestDto1 = orderService.createOrder(orderRequestDto);
+        ShipmentDto sample = ShipmentDto.builder()
+                .orderId(orderRequestDto1.getId())
+                .address("address")
+                .city("city")
+                .state("state")
+                .zipCode("500017")
+                .shipmentStatus(ShipmentStatus.CREATED)
+                .build();
+        ShipmentDto res = shipmentFeignClient.createShipment(sample);
+        System.out.println(res);
         return ResponseEntity.ok(orderRequestDto1);
     }
 

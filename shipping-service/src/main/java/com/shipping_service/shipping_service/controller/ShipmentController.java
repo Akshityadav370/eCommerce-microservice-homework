@@ -22,6 +22,7 @@ public class ShipmentController {
 
     @PostMapping("/create")
     public ResponseEntity<ShipmentDto> createShipment(@RequestBody ShipmentDto shipmentDto) {
+        System.out.println("Create Shipping");
         return ResponseEntity.ok(shipmentService.createShipment(shipmentDto));
     }
 

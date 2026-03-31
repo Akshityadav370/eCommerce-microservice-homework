@@ -1,4 +1,4 @@
-package com.order_service.order_service.config;
+package com.shipping_service.shipping_service.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

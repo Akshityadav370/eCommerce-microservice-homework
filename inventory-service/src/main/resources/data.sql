@@ -1,3 +1,4 @@
+SET SCHEMA 'public';
 INSERT INTO products (name, stock, price) VALUES
 ('Smartphone', 50, 699.99),
 ('Laptop', 30, 1299.99),

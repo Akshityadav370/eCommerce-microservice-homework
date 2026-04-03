@@ -8,6 +8,7 @@ import com.shipping_service.shipping_service.entity.ShipmentStatus;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,14 +20,17 @@ import java.util.List;
 @Slf4j
 public class OrdersController {
 
+    @Value("${my.variable}")
+    private String myVariable;
+
     private final OrdersService orderService;
     private final ShipmentFeignClient shipmentFeignClient;
 
     @GetMapping("/helloOrders")
-    public String helloOrders(@RequestHeader("X-User-Id") Long userId) {
+    public String helloOrders() {
 
         System.out.println(shipmentFeignClient.helloShipment());
-        return "Hello from Orders Service, userId is: "+userId;
+        return "Hello from Orders Service, userId is: "+myVariable;
     }
 
     @PostMapping("/create-order")
